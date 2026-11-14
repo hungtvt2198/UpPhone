@@ -2,17 +2,15 @@
 
 Kho phát hành chính thức bộ cài đặt và cập nhật tự động của phần mềm **UpPhone – Phone Farm Shopee Video Uploader** (Windows x64).
 
-- **Phiên bản mới nhất:** **`v1.0.3`** *(phát hành ngày 13/11/2026)*
-- **Tải trực tiếp bộ cài đặt:** **[UpPhone_Setup.exe (v1.0.3)](https://github.com/hungtvt2198/UpPhone/releases/download/v1.0.3/UpPhone_Setup.exe)**
+- **Phiên bản mới nhất:** **`v1.0.4`** *(phát hành ngày 14/11/2026)*
+- **Tải trực tiếp bộ cài đặt:** **[UpPhone_Setup.exe (v1.0.4)](https://github.com/hungtvt2198/UpPhone/releases/download/v1.0.4/UpPhone_Setup.exe)**
 
 ---
 
-## Điểm mới trong phiên bản `v1.0.3`
-- **Giao diện nền trắng (Light Theme):** Đồng bộ giao diện sáng rõ, chữ đậm dễ quan sát trên bảng tác vụ, thiết kế workflow và quản lý thiết bị.
-- **Tô đỏ dòng thiếu file video thông minh:** Đánh dấu trực quan các dòng không tìm thấy video khi bấm **Chạy** để sửa đường dẫn nhanh ngay trên bảng.
-- **Ẩn nút Chạy khi đang chạy:** Tránh bấm trùng ngoài ý muốn; tự động hiện lại khi có dữ liệu mới, chọn thêm dòng chưa chạy hoặc khi các máy hoàn tất.
-- **Nhập thêm Excel nối tiếp (1 luồng/máy):** Cho phép nạp thêm file Excel mới ngay trong lúc đang chạy và xếp hàng tuần tự an toàn cho từng thiết bị.
-- **Phóng to màn hình mượt ngay lập tức:** Điều khiển tức thì khi mở màn hình lớn không bị trễ chờ kết nối lại.
+## Điểm mới trong phiên bản `v1.0.4`
+- **Tùy chọn chuyển đổi Light Mode / Dark Mode:** Bổ sung nút **Light / Dark** nằm ngay phía trên nút **Update** ở thanh bên trái, cho phép chuyển đổi tức thì giữa giao diện sáng và giao diện tối, tự động lưu chế độ cho các lần mở sau.
+- **Sửa lỗi hiển thị thông tin (Tooltip) trên nền sáng:** Khắc phục triệt để lỗi hộp thông tin / chú thích (`QToolTip`) bị nền đen chữ tối khó đọc trên bảng Dữ liệu và trang Thiết bị.
+- **Đồng bộ màu sắc & biểu tượng toàn diện:** Làm mới đồng bộ màu nút bấm, biểu tượng, hộp thoại, bảng tác vụ, khung màn hình và canvas thiết kế workflow trên cả 2 chế độ Sáng / Tối.
 
 ## Cài đặt lần đầu
 1. Tải file **[`UpPhone_Setup.exe`](https://github.com/hungtvt2198/UpPhone/releases/latest)** ở mục **[Releases](https://github.com/hungtvt2198/UpPhone/releases)**.
