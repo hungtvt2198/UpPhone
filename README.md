@@ -17,10 +17,10 @@ Thanh icon bên trái chuyển giữa 5 trang:
 
 | Icon | Trang | Nội dung |
 |---|---|---|
-| ☰ | **Dữ liệu** | Bảng các dòng Excel, chạy / dừng / xóa |
-| 🖧 | **Thiết bị đã kết nối** | Danh sách máy trong `adb devices`, ghi chú, Mirror, copy serial |
-| 📱 | **Màn hình phone** | Lưới màn hình từng máy (scrcpy) + các nút kết nối |
-| ⚡ | **Workflow** | Thiết kế workflow dạng node |
+| ☰ | **Dữ liệu** | Bảng các dòng Excel (Pill Badge trạng thái trực quan), chạy / hẹn giờ / dừng / xóa |
+| 🖧 | **Thiết bị đã kết nối** | Danh sách máy trong `adb devices` kèm thẻ thống kê trực tuyến `USB / WiFi`, ghi chú, Mirror |
+| 📱 | **Phone control** | Lưới màn hình trực tiếp ~0 ms (tự kết nối lại khi rớt mạng) & điều khiển nhóm 20+ máy mượt mà |
+| ⚡ | **Workflow** | Thiết kế workflow dạng node (đường nối Orthogonal góc vuông 90° kèm 4 nhóm màu ngữ nghĩa) |
 | 🕘 | **Nhật ký chung** | Log của tất cả các máy |
 
 ### Trang Dữ liệu
@@ -69,9 +69,11 @@ Thanh icon bên trái chuyển giữa 5 trang:
   - serial USB (xem bằng `adb devices`, vd `R58M12ABC`), hoặc
   - giữ nguyên `IP:5555`: phần mềm đọc IP WiFi của từng máy USB để tìm máy tương ứng. Như vậy cùng một file Excel dùng được cho cả hai chế độ.
 - **📶 USB → WiFi**: bật `adb tcpip 5555` cho mọi máy đang cắm USB, kết nối WiFi luôn và copy danh sách `IP:5555` để dán vào Excel.
-- **Điều khiển trực tiếp & Đồng bộ nhóm (Group Control độ trễ ~0 ms)**:
-  - Nhấp đúp vào ô thiết bị trên lưới để phóng to màn hình điều khiển (`StreamDialog`). Ô nhỏ trên lưới tự phủ tối kèm bảng trạng thái **🎮 Đang điều khiển** và viền xanh lá để nhận biết rõ máy đang mở lớn.
-  - Thanh chức năng bên phải màn hình phóng to gồm 21 nút tiện ích: **📂 Truyền file từ PC**, **🗑 Xóa file Thư viện** (xóa sạch ảnh/video trong Thư viện và làm mới MediaStore cho **1 máy** đang mở hoặc **đồng bộ nhiều máy** đang chọn), **📦 Cài đặt APK**, xoay màn hình, chụp ảnh màn hình, tắt màn hình vật lý vẫn chiếu trên PC, đặt số máy làm hình nền...
+- **Điều khiển trực tiếp & Đồng bộ nhóm 20+ máy mượt mà (Group Control độ trễ ~0 ms)**:
+  - Nhấp đúp vào ô thiết bị trên lưới để phóng to màn hình điều khiển (`StreamDialog`) mở ngay trong `0 ms`. Ô nhỏ trên lưới tự phủ tối kèm bảng trạng thái **🎮 Đang điều khiển** và viền xanh lá để nhận biết rõ máy đang mở lớn.
+  - Phiên chiếu màn hình tự động kiểm tra sức khỏe kết nối và kết nối lại liên tục khi WiFi ADB chập chờn (kèm dải cảnh báo ở đáy khung hình nếu tạm mất kết nối, tránh nhầm ảnh tĩnh cũ với màn hình thật).
+  - Tối ưu giải mã H.264 cho dàn 20–40 máy và gửi sự kiện chạm bất đồng bộ kèm gộp tọa độ rê chuột theo từng thiết bị để thao tác đồng loạt 20 máy không bị giật/trễ.
+  - Thanh chức năng bên phải màn hình phóng to bố trí theo **Bento Grid 4 nhóm** gồm 21 nút tiện ích: **📂 Truyền file từ PC**, **🗑 Xóa file Thư viện** (xóa sạch ảnh/video trong Thư viện và làm mới MediaStore cho **1 máy** đang mở hoặc **đồng bộ nhiều máy** đang chọn), **📦 Cài đặt APK**, xoay màn hình, chụp ảnh màn hình, tắt màn hình vật lý vẫn chiếu trên PC, đặt số máy làm hình nền...
 
 ## File Excel (template `import/shopee_upload_teamplte.xlsx`)
 | Cột | Ý nghĩa | Biến trong workflow |
