@@ -1,29 +1,130 @@
-# UpPhone – Official Installer & Releases
+# UpPhone – Phone Farm Shopee Video Uploader
 
-Kho phát hành chính thức bộ cài đặt và cập nhật tự động của phần mềm **UpPhone – Phone Farm Shopee Video Uploader** (Windows x64).
+## Cài đặt & Cập nhật
+### Cách 1: Dành cho người dùng (File cài đặt 1 chạm)
+1. Tải và chạy **`UpPhone_Setup.exe`** (từ trang Releases `https://github.com/hungtvt2198/UpPhone/releases`).
+2. Bấm **Yes** khi Windows hỏi quyền Quản trị viên (UAC) → chọn thư mục cài đặt (mặc định **`C:\Program Files\UpPhone`**) → bấm **Cài đặt ngay**.
+3. Khi có phiên bản mới, bấm nút **Update** (*Check for Update*) ở góc dưới cùng thanh chọn tab bên trái để tự động tải và nâng cấp trực tiếp (mọi workflow, ảnh mẫu, ghi chú và số máy trong `C:\Program Files\UpPhone` đều được giữ nguyên).
 
-- **Phiên bản mới nhất:** **1.0.5** *(phát hành ngày 14/11/2026)*
-- **Tải trực tiếp bộ cài đặt:** **[UpPhone_Setup.exe (v1.0.5)](https://github.com/hungtvt2198/UpPhone/releases/download/v1.0.5/UpPhone_Setup.exe)**
+### Cách 2: Chạy từ mã nguồn (Dành cho phát triển)
+1. `conda activate E:\UpPhone\venup` rồi `pip install -r requirements.txt`
+2. Giải nén **scrcpy-win64** (có kèm adb) vào `tools/`. Đặt **ADBKeyboard.apk** vào `tools/` (để nhập tiếng Việt có dấu / emoji).
+3. Bật *Gỡ lỗi không dây* trên điện thoại (hoặc `adb tcpip 5555` qua USB một lần).
+4. Chạy `run.bat` hoặc `python main_ui.py` (đóng gói lại bộ cài bằng `python packaging\build_installer.py`).
 
----
+## Giao diện
+Thanh icon bên trái chuyển giữa 5 trang:
 
-## Điểm mới trong phiên bản 1.0.5
+| Icon | Trang | Nội dung |
+|---|---|---|
+| ☰ | **Dữ liệu** | Bảng các dòng Excel, chạy / dừng / xóa |
+| 🖧 | **Thiết bị đã kết nối** | Danh sách máy trong `adb devices`, ghi chú, Mirror, copy serial |
+| 📱 | **Màn hình phone** | Lưới màn hình từng máy (scrcpy) + các nút kết nối |
+| ⚡ | **Workflow** | Thiết kế workflow dạng node |
+| 🕘 | **Nhật ký chung** | Log của tất cả các máy |
 
-- **Cho phép sửa các dòng chưa chạy khi đang chạy tự động:** Khi đã bấm chạy, phần mềm chỉ khóa các dòng đang thực sự Đang chạy; các dòng Chờ, Lỗi, Thành công, Đã dừng vẫn chỉnh sửa trực tiếp được 6 cột (ID KÊnh, SERIAL, TÊN WORKFLOW, ĐƯỜNG DẪN VIDEO, LINK AFFILIATE, TIÊU ĐỀ) và nút chọn file video 📁. Nếu đổi SERIAL của dòng đang Chờ trong hàng chạy, dòng sẽ tự chuyển sang luồng của máy mới.
-- **Sửa giao diện trình cài đặt & cập nhật (UpPhone_Setup.exe):** Chuyển sang nền trắng chữ đậm có độ tương phản cao, khắc phục hoàn toàn tình trạng chữ nút bấm và checkbox bị tối mờ khó đọc khi cài đặt / cập nhật tự động.
-- **Cải tiến hộp thoại Thêm dòng & danh sách ID kênh từ Google Sheet:**
-  - Loại bỏ dòng Hashtag và Link air khỏi hộp thoại **Thêm**.
-  - Danh sách **Serial** hiển thị kèm ghi chú của thiết bị (ví dụ 192.168.10.32:5555 (Trend)).
-  - Ô **ID Kênh** vừa cho phép gõ tay vừa chọn từ danh sách dropdown tự động đồng bộ từ Google Sheet Data Master (cột B từ ô B7 trở xuống) ở cả hộp thoại Thêm và khi sửa trực tiếp trên bảng.
-- **Phân biệt 2 trường hợp link_air theo Workflow:**
-  - **shopee_AI_link & shopee_link (lấy link):** kiểm tra URL thật ở cột link_air khi mở Excel và bắt buộc phải lấy được link_air khi chạy xong.
-  - **Các workflow khác (không lấy link):** không kiểm tra link_air khi chạy; tự động đánh dấu "Done" vào cột link_air trên file Excel sau khi hoàn thành để lần mở sau không chạy trùng lại.
+### Trang Dữ liệu
+- **Nhập Excel**: chọn file chứa thông tin đăng video. **Mẫu Excel**: lưu file template. **Xuất Excel**: xuất các dòng đang hiển thị ra file mới, kèm *Trạng thái* và *Thời gian kết thúc*. Khi nhập lại file đã xuất, trạng thái được giữ.
+- **Thêm**: nhập tay 1 dòng (chọn Serial kèm ghi chú, chọn/nhập ID Kênh từ Google Sheet Data Master). **Chạy (n)** / **Hẹn giờ** / **Xóa (n)**: áp dụng cho các dòng đã tick và đang hiển thị. **Dừng**: dừng tất cả các máy (hoặc hủy lịch hẹn giờ đang đếm ngược).
+- **Hẹn giờ bắt đầu chạy**: chọn thời điểm cụ thể (ngày/giờ/phút + nút chọn nhanh `+15 phút`, `+30 phút`, `+1 giờ`, `+2 giờ`) hoặc đếm ngược sau X giờ Y phút; nút `Hẹn giờ` hiển thị thời gian đếm ngược trực tiếp và tự động kích hoạt chạy khi đến giờ.
+- **Lọc dữ liệu**: lọc theo serial, workflow, trạng thái hoặc từ khóa. **Trạng thái** tick được nhiều ô cùng lúc (không tick ô nào = tất cả). Danh sách **Serial** hiện ghi chú của máy; máy chưa có ghi chú thì hiện IP. Số đỏ trên nút là số điều kiện lọc đang bật.
+- **Tự chạy lại dòng lỗi**: mỗi máy chạy hết các dòng của mình. Sau dòng cuối, nếu còn dòng **Lỗi** thì máy nghỉ đúng thời gian *Nghỉ giữa video*, rồi chạy lại **1 lần** các dòng lỗi đó.
+  - Dòng thành công không chạy lại.
+  - Không chạy lại: dòng *Đã dừng*, dòng thiếu workflow, hoặc khi đã bấm **Dừng**.
+  - Trong lúc chờ chạy lại, dòng lỗi vẫn bị khóa. Bấm ■ trên dòng đó để bỏ lượt chạy lại.
+- Trên mỗi dòng:
+  - 🖥 cạnh serial: mở **cửa sổ Mirror** của máy (giống nút Mirror ở trang Thiết bị), tiêu đề là *Ghi chú* của máy. Bấm lại thì đưa cửa sổ lên trước.
+  - 👁 cạnh video: mở video. 📁: **chọn lại file video** (khi đường dẫn trong Excel bị sai).
+  - 📄 **Log**: xem workflow đang chạy đến bước nào; nếu lỗi thì hiện chi tiết lỗi. Nhấp đúp vào ô không sửa được cũng mở Log. Dòng lỗi có thêm icon ⚠ đỏ.
+  - ▶ **Chạy** riêng dòng đó. Nếu máy đang chạy dòng khác thì phần mềm báo *Máy đang bận*. Khi dòng đang chạy hoặc đang chờ, nút đổi thành ■ để dừng riêng dòng đó; máy sẽ chạy tiếp dòng sau.
+  - 🗑 **Xóa** dòng khỏi danh sách. File Excel không bị thay đổi. Không xóa được dòng đang chạy.
+- **Sửa trực tiếp trên bảng**: bấm 1 lần vào ô **ID**, **SERIAL**, **TÊN WORKFLOW**, **ĐƯỜNG DẪN VIDEO**, **LINK AFFILIATE** hoặc **TIÊU ĐỀ** để sửa. Enter để lưu, Esc để hủy.
+  - Chỉ khóa dòng đang thực sự **Đang chạy**; các dòng đang *Chờ* trong hàng đợi vẫn sửa được bình thường (đổi SERIAL sẽ tự chuyển dòng chờ sang máy mới).
+  - SERIAL: gõ IP (không cần `:5555`) hoặc serial USB. Cột Ghi chú tự đổi theo máy mới.
+  - TÊN WORKFLOW: chọn trong danh sách các workflow đang có.
+  - TIÊU ĐỀ: Shift+Enter để xuống dòng. Chỗ sửa chỉ lưu trong phần mềm, file Excel gốc không bị thay đổi; muốn lưu ra file thì bấm **Xuất Excel**.
+- Cột **STT**: số thứ tự của dòng trong phần mềm (1, 2, 3...), không phải số dòng trong Excel. Lọc dữ liệu thì số không đổi; xóa dòng thì đánh số lại. Rê chuột để xem số dòng Excel.
+- Cột **Trạng thái** chỉ hiện *Thành công*, *Lỗi*, *Đang chạy* (3 chấm nhấp nhô), ngoài ra còn *Chờ* / *Đã dừng*. Chi tiết lỗi xem ở nút 📄 **Log**. Rê chuột vào dòng đang chạy để xem bước đang chạy.
+- Cột **Ghi chú** hiện ghi chú của máy (nhập ở trang Thiết bị).
+- Cột **LINK AIR**: ngay khi workflow lấy được link video đã đăng (`GETCLIPBOARD`), phần mềm tự hiển thị kèm nút 📋 copy nhanh **và tự động lưu thẳng vào đúng dòng trong file Excel gốc** (nếu file đang mở trong Microsoft Excel, phần mềm sẽ tự ghi bù ngay khi bạn đóng Excel). Khi **Nhập Excel** mở lại file đã có `link_air`, các dòng có sẵn link tự động được đánh dấu **Thành công** để bỏ qua, không đăng trùng lại.
 
-## Cài đặt lần đầu
-1. Tải file **[UpPhone_Setup.exe](https://github.com/hungtvt2198/UpPhone/releases/latest)** ở mục **[Releases](https://github.com/hungtvt2198/UpPhone/releases)**.
-2. Mở UpPhone_Setup.exe → bấm **Yes** khi Windows hỏi quyền Quản trị viên (UAC).
-3. Chọn thư mục cài đặt (mặc định **C:\Program Files\UpPhone**) và bấm **Cài đặt ngay**.
+### Trang Thiết bị đã kết nối
+- Liệt kê các máy đang có trong `adb devices` (USB hoặc IP), tự làm mới 10 giây/lần; bấm **Làm mới** để đọc lại ngay.
+- Cột **Số serial**: máy WiFi chỉ hiện IP (không có cổng `:5555`).
+- 📋 **Copy**: copy serial đang hiển thị. 🖥 **Mirror**: mở cửa sổ màn hình riêng của máy, tiêu đề *Ghi chú - Serial - Model* (bấm lại thì đưa cửa sổ lên trước).
+- Cột **Ghi chú**: gõ trực tiếp (vd tên các kênh đã đăng nhập), tự lưu vào `device_notes.json`. Cùng 1 máy cắm USB hay nối IP dùng chung ghi chú.
+- Ô tìm kiếm: lọc theo serial hoặc ghi chú.
 
-## Cập nhật phiên bản mới
-- Trong phần mềm UpPhone, bấm nút **Update** (*Check for Update*) ở góc dưới cùng thanh chọn tab bên trái để tự động kiểm tra, tải và nâng cấp lên phiên bản mới nhất.
-- Toàn bộ workflows/, 	emplates/, ghi chú thiết bị và cấu hình số máy của bạn được giữ nguyên 100% khi cập nhật.
+#### Panel quét IP (bên phải trang Thiết bị)
+- **Bước 1 – Kích hoạt cổng mạng:** nút **Bật (n)** chạy `adb tcpip 5555` cho n máy đang cắm USB rồi kết nối WiFi luôn.
+  - Ô **Tự bật tcpip khi cắm USB** (mặc định bật): phone khởi động lại sẽ mất tcpip, chỉ cần cắm USB là phần mềm tự bật lại (khoảng 10 giây), sau đó rút cáp. Chỉ hoạt động khi trang Màn hình phone đang ở chế độ WiFi.
+- **Bước 2 – Quét thiết bị:** nhập dải IP vào 4 ô, mỗi ô là 1 số hoặc khoảng `a-b` (vd `192 · 168 · 10 · 1-255`).
+  - **Quét**: tìm các máy mở cổng 5555 trong dải và `adb connect` (255 IP khoảng 1 giây).
+  - **Thêm**: lưu dải vào danh sách để lần sau bấm **Quét** trên thẻ, hoặc **Quét tất cả**.
+- Ô **Tự quét khi mở phần mềm** (mặc định bật): khi PC khởi động lại, mở phần mềm là tự kết nối lại các IP đã từng kết nối và quét các dải đã lưu.
+
+## Kết nối điện thoại (trang Màn hình phone)
+- **📶 WiFi**: kết nối tới `IP:5555` ghi trong Excel. Phần mềm tự kết nối lại khi mất kết nối.
+- **🔌 USB**: dùng các máy đang cắm cáp. Cột `Serial` có thể ghi:
+  - serial USB (xem bằng `adb devices`, vd `R58M12ABC`), hoặc
+  - giữ nguyên `IP:5555`: phần mềm đọc IP WiFi của từng máy USB để tìm máy tương ứng. Như vậy cùng một file Excel dùng được cho cả hai chế độ.
+- **📶 USB → WiFi**: bật `adb tcpip 5555` cho mọi máy đang cắm USB, kết nối WiFi luôn và copy danh sách `IP:5555` để dán vào Excel.
+- **Điều khiển trực tiếp & Đồng bộ nhóm (Group Control độ trễ ~0 ms)**:
+  - Nhấp đúp vào ô thiết bị trên lưới để phóng to màn hình điều khiển (`StreamDialog`). Ô nhỏ trên lưới tự phủ tối kèm bảng trạng thái **🎮 Đang điều khiển** và viền xanh lá để nhận biết rõ máy đang mở lớn.
+  - Thanh chức năng bên phải màn hình phóng to gồm 21 nút tiện ích: **📂 Truyền file từ PC**, **🗑 Xóa file Thư viện** (xóa sạch ảnh/video trong Thư viện và làm mới MediaStore cho **1 máy** đang mở hoặc **đồng bộ nhiều máy** đang chọn), **📦 Cài đặt APK**, xoay màn hình, chụp ảnh màn hình, tắt màn hình vật lý vẫn chiếu trên PC, đặt số máy làm hình nền...
+
+## File Excel (template `import/shopee_upload_teamplte.xlsx`)
+| Cột | Ý nghĩa | Biến trong workflow |
+|---|---|---|
+| **Serial** | `IP:5555` hoặc serial USB | `{{Serial}}` |
+| **Workflow** | tên workflow (vd `shopee_AI`) | `{{Workflow}}` |
+| **Video_Path_shopee_affiliate** | đường dẫn video trên PC | `{{Video_Path}}` = `{{localPath}}` |
+| **Affiliate_Link_shopee** | link affiliate | `{{Affiliate_Link}}` = `{{link}}` |
+| **Title_shopee_affiliate** | **title dùng khi đăng video** | `{{Title}}` = `{{title}}` |
+| hashtag | hashtag (không tự nối vào title) | `{{hashtag}}` |
+| link_air | link video đã đăng (tự lưu thẳng vào file Excel gốc; dòng có sẵn `link_air` sẽ tự đặt là *Thành công* khi nhập lại) | `{{link_air}}` |
+| Title | không dùng | – |
+
+- Cột in đậm là bắt buộc. Tên cột không phân biệt hoa/thường, thứ tự tùy ý; dòng không có Serial bị bỏ qua.
+- Mỗi dòng là một lần đăng video. Các dòng của cùng một máy chạy lần lượt; các máy khác nhau chạy song song.
+- Có thể thêm cột tùy ý (vd `Ghi_chu`) và dùng trong workflow dưới dạng `{{Ghi_chu}}`.
+- Bấm **Mẫu Excel** để có file Excel đúng bố cục template.
+
+## Thiết kế workflow dạng node (trang ⚡ Workflow)
+- **➕ Mới**: tên workflow phải trùng với cột `Workflow`. Workflow được lưu ở `workflows/<tên>.json` (định dạng Vue Flow, giống tool gốc).
+- **📥 Nhập JSON / 📤 Xuất JSON**: mở hoặc xuất workflow của tool gốc (vd `import/shopee_AI.json`, đã được nhập sẵn thành workflow `shopee_AI`).
+- **Thêm node**: kéo từ bảng bên trái vào canvas. Nhấp đúp để thêm node bên phải node đang chọn và tự nối dây.
+- **Nối dây**: kéo từ cổng phải (ra) sang node khác. Mỗi node có 1 dây ra; workflow chạy từ **START** theo dây.
+- **FINALLY**: nhánh nối sau FINALLY luôn chạy khi kết thúc, kể cả khi lỗi hoặc bấm Dừng. Dùng để dọn dẹp, vd xóa video đã đẩy.
+- **Lỗi**: mỗi node chọn *Dừng workflow* hoặc *Bỏ qua lỗi, chạy tiếp*.
+- **Phím tắt**:
+  - Del: xóa
+  - Ctrl+C / Ctrl+V / Ctrl+D: chép / dán / nhân bản
+  - Ctrl+A: chọn hết
+  - F: vừa màn hình
+  - Ctrl+S: lưu
+  - Lăn chuột: zoom
+  - Chuột giữa hoặc giữ Space + kéo: di chuyển canvas
+- **Công cụ trong form node**:
+  - 📍 chọn tọa độ trên ảnh chụp màn hình
+  - 🔍 bấm vào phần tử để lấy XPath
+  - 🧪 kiểm tra XPath
+  - ✂ cắt ảnh mẫu (lưu vào `templates/`)
+  - Trên ảnh chụp: chuột phải = chạm thật lên máy, rồi tự chụp lại.
+- **Chạy thử** (bên phải): chạy toàn bộ, chạy từ node chọn, hoặc chạy 1 node, với biến test. Node đổi màu khi chạy: xanh dương = đang chạy, xanh lá = xong, đỏ = lỗi.
+  - Node SETVARIABLE không nối dây được coi là giá trị test (chỉ dùng khi bật ô tương ứng). Khi chạy thật, giá trị lấy từ Excel.
+
+### Biến
+- Cú pháp `{{ten_bien}}`. Có sẵn: `{{Video_Path}} {{Title}} {{Affiliate_Link}} {{hashtag}} {{Video_Name}} {{Serial}} {{Row}}`, tên cột gốc (`{{Title_shopee_affiliate}}`...) và các cột thêm trong Excel.
+- Tên gọi của tool gốc được tự ánh xạ: `{{localPath}}` = Video_Path, `{{title}}` = Title (tức Title_shopee_affiliate), `{{link}}` = Affiliate_Link.
+- RANDOMSTRING / SETVARIABLE tạo biến mới, vd `{{file}}` để đặt tên video khi PUSHFILE.
+
+### Ghi chú về node
+- **XPATH**: chờ tới khi thấy phần tử (tối đa *Chờ tối đa*), sau đó chạm vào giữa phần tử.
+- **CLICKIMAGE**: tìm ảnh mẫu trên màn hình bằng OpenCV, khớp ≥ ngưỡng thì chạm.
+- **SETCLIPBOARD / PASTE**: dùng app **Clipper** (`ca.zgrs.clipper`) nếu máy có cài.
+  - Không có Clipper: PASTE gõ nội dung bằng ADBKeyboard.
+- **DELETEFILE**: không cho xóa thư mục hệ thống/gốc (`/sdcard`, `DCIM/Camera`...).
+
+> Workflow dạng danh sách cũ được tự chuyển sang dạng node khi mở. `Shopee_Mau` chỉ là ví dụ (tọa độ giả định).
+> Ảnh mẫu trong `shopee_AI` trỏ tới `D:\Tool upload video\123\template.png` – hãy chọn/cắt lại nếu máy bạn không có file này.
