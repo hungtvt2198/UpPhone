@@ -71,7 +71,7 @@ Thanh icon bên trái chuyển giữa 5 trang:
 - **📶 USB → WiFi**: bật `adb tcpip 5555` cho mọi máy đang cắm USB, kết nối WiFi luôn và copy danh sách `IP:5555` để dán vào Excel.
 - **Điều khiển trực tiếp & Đồng bộ nhóm 20+ máy mượt mà (Group Control độ trễ ~0 ms)**:
   - Nhấp đúp vào ô thiết bị trên lưới để phóng to màn hình điều khiển (`StreamDialog`) mở ngay trong `0 ms`. Ô nhỏ trên lưới tự phủ tối kèm bảng trạng thái **🎮 Đang điều khiển** và viền xanh lá để nhận biết rõ máy đang mở lớn.
-  - Phiên chiếu màn hình tự động kiểm tra sức khỏe kết nối và kết nối lại liên tục khi WiFi ADB chập chờn (kèm dải cảnh báo ở đáy khung hình nếu tạm mất kết nối, tránh nhầm ảnh tĩnh cũ với màn hình thật).
+  - Phiên chiếu màn hình giữ kết nối ổn định kể cả khi máy đứng yên không thao tác, tự động đẩy lại `scrcpy-server` & kết nối lại liên tục khi WiFi ADB chập chờn (hoặc bấm **Kết nối thiết bị** để ép nối lại tức thì, tự dọn IP đã ngoại tuyến và hiện dải cảnh báo ở đáy khung hình nếu đang mất kết nối).
   - Tối ưu giải mã H.264 cho dàn 20–40 máy và gửi sự kiện chạm bất đồng bộ kèm gộp tọa độ rê chuột theo từng thiết bị để thao tác đồng loạt 20 máy không bị giật/trễ.
   - Thanh chức năng bên phải màn hình phóng to bố trí theo **Bento Grid 4 nhóm** gồm 21 nút tiện ích: **📂 Truyền file từ PC**, **🗑 Xóa file Thư viện** (xóa sạch ảnh/video trong Thư viện và làm mới MediaStore cho **1 máy** đang mở hoặc **đồng bộ nhiều máy** đang chọn), **📦 Cài đặt APK**, xoay màn hình, chụp ảnh màn hình, tắt màn hình vật lý vẫn chiếu trên PC, đặt số máy làm hình nền...
 
