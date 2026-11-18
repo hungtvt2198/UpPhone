@@ -12,8 +12,10 @@
 3. Bật *Gỡ lỗi không dây* trên điện thoại (hoặc `adb tcpip 5555` qua USB một lần).
 4. Chạy `run.bat` hoặc `python main_ui.py` (đóng gói lại bộ cài bằng `python packaging\build_installer.py`).
 
-## Giao diện
-Thanh icon bên trái chuyển giữa 5 trang:
+## Giao diện (Soft Fluent – Light / Dark Mode)
+- Màn hình khởi động tối giản đồng bộ giao diện Sáng / Tối; nút chuyển **Light / Dark Mode** nằm ngay phía trên nút **Update** ở thanh trái (Light Mode đạt độ tương phản cao, tách biệt rõ từng thẻ & bảng).
+- Hộp thoại tải bản cập nhật và trình cài đặt **`UpPhone_Setup.exe`** thiết kế đồng bộ Soft Fluent, hiển thị dung lượng, tốc độ tải (`MB/s`), thời gian ước tính và tiến độ trực quan.
+- Thanh icon bên trái chuyển giữa 5 trang:
 
 | Icon | Trang | Nội dung |
 |---|---|---|
@@ -127,6 +129,7 @@ Thanh icon bên trái chuyển giữa 5 trang:
 - **SETCLIPBOARD / PASTE**: dùng app **Clipper** (`ca.zgrs.clipper`) nếu máy có cài.
   - Không có Clipper: PASTE gõ nội dung bằng ADBKeyboard.
 - **DELETEFILE**: không cho xóa thư mục hệ thống/gốc (`/sdcard`, `DCIM/Camera`...).
+- **VERIFYCHANNEL**: kiểm tra tên kênh đang đăng nhập trên màn hình khớp với cột `ID` trước khi tiếp tục, giúp tránh đăng nhầm kênh.
 
 > Workflow dạng danh sách cũ được tự chuyển sang dạng node khi mở. `Shopee_Mau` chỉ là ví dụ (tọa độ giả định).
 > Ảnh mẫu trong `shopee_AI` trỏ tới `D:\Tool upload video\123\template.png` – hãy chọn/cắt lại nếu máy bạn không có file này.
