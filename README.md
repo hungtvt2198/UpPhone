@@ -26,8 +26,8 @@
 | 🕘 | **Nhật ký chung** | Log của tất cả các máy |
 
 ### Trang Dữ liệu
-- **Nhập Excel**: chọn file chứa thông tin đăng video. **Mẫu Excel**: lưu file template. **Xuất Excel**: xuất các dòng đang hiển thị ra file mới, kèm *Trạng thái* và *Thời gian kết thúc*. Khi nhập lại file đã xuất, trạng thái được giữ.
-- **Thêm**: nhập tay 1 dòng (chọn Serial kèm ghi chú, chọn/nhập ID Kênh từ Google Sheet Data Master). **Chạy (n)** / **Hẹn giờ** / **Xóa (n)**: áp dụng cho các dòng đã tick và đang hiển thị. **Dừng**: dừng tất cả các máy (hoặc hủy lịch hẹn giờ đang đếm ngược).
+- **Nhập Excel**: cho phép chọn **nhiều file Excel cùng lúc** chứa thông tin đăng video; nếu bảng đã có dữ liệu (cả khi đang rảnh lẫn đang chạy) sẽ tự cộng dồn vào cuối bảng mà không làm mất các file đã nhập trước đó. **Mẫu Excel**: lưu file template. **Xuất Excel**: xuất các dòng đang hiển thị ra file mới, kèm *Trạng thái* và *Thời gian kết thúc*. Khi nhập lại file đã xuất, trạng thái được giữ.
+- **Thêm**: nhập tay 1 dòng (chọn Serial kèm ghi chú, chọn/nhập ID Kênh từ Google Sheet Data Master). **Chạy (n)** / **Hẹn giờ** / **Xóa (n)**: áp dụng cho các dòng đã tick và đang hiển thị (dấu tích những dòng đã chọn luôn được giữ nguyên sau khi bấm chạy để tiện theo dõi hoặc chạy lại). **Dừng**: dừng tất cả các máy (hoặc hủy lịch hẹn giờ đang đếm ngược).
 - **Hẹn giờ bắt đầu chạy**: chọn thời điểm cụ thể (ngày/giờ/phút + nút chọn nhanh `+15 phút`, `+30 phút`, `+1 giờ`, `+2 giờ`) hoặc đếm ngược sau X giờ Y phút; nút `Hẹn giờ` hiển thị thời gian đếm ngược trực tiếp và tự động kích hoạt chạy khi đến giờ.
 - **Lọc dữ liệu**: lọc theo serial, workflow, trạng thái hoặc từ khóa. **Trạng thái** tick được nhiều ô cùng lúc (không tick ô nào = tất cả). Danh sách **Serial** hiện ghi chú của máy; máy chưa có ghi chú thì hiện IP. Số đỏ trên nút là số điều kiện lọc đang bật.
 - **Tự chạy lại dòng lỗi**: mỗi máy chạy hết các dòng của mình. Sau dòng cuối, nếu còn dòng **Lỗi** thì máy nghỉ đúng thời gian *Nghỉ giữa video*, rồi chạy lại **1 lần** các dòng lỗi đó.
