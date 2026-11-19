@@ -27,7 +27,7 @@
 
 ### Trang Dữ liệu
 - **Nhập Excel**: cho phép chọn **nhiều file Excel cùng lúc** chứa thông tin đăng video; nếu bảng đã có dữ liệu (cả khi đang rảnh lẫn đang chạy) sẽ tự cộng dồn vào cuối bảng mà không làm mất các file đã nhập trước đó. **Mẫu Excel**: lưu file template. **Xuất Excel**: xuất các dòng đang hiển thị ra file mới, kèm *Trạng thái* và *Thời gian kết thúc*. Khi nhập lại file đã xuất, trạng thái được giữ.
-- **Thêm**: nhập tay 1 dòng (chọn Serial kèm ghi chú, chọn/nhập ID Kênh từ Google Sheet Data Master). **Chạy (n)** / **Hẹn giờ** / **Xóa (n)**: áp dụng cho các dòng đã tick và đang hiển thị (dấu tích những dòng đã chọn luôn được giữ nguyên sau khi bấm chạy để tiện theo dõi hoặc chạy lại). **Dừng**: dừng tất cả các máy (hoặc hủy lịch hẹn giờ đang đếm ngược).
+- **Thêm**: nhập tay 1 dòng (chọn Serial kèm ghi chú, chọn/nhập ID Kênh từ Google Sheet Data Master). **Chạy (n)** / **Hẹn giờ** / **Xóa (n)**: áp dụng cho các dòng đã tick và đang hiển thị (dấu tích ở tất cả các dòng — kể cả dòng đang chạy — luôn hiển thị và không bị khóa để có thể chọn/bỏ chọn tự do bất cứ lúc nào). **Dừng**: dừng tất cả các máy (hoặc hủy lịch hẹn giờ đang đếm ngược).
 - **Hẹn giờ bắt đầu chạy**: chọn thời điểm cụ thể (ngày/giờ/phút + nút chọn nhanh `+15 phút`, `+30 phút`, `+1 giờ`, `+2 giờ`) hoặc đếm ngược sau X giờ Y phút; nút `Hẹn giờ` hiển thị thời gian đếm ngược trực tiếp và tự động kích hoạt chạy khi đến giờ.
 - **Lọc dữ liệu**: lọc theo serial, workflow, trạng thái hoặc từ khóa. **Trạng thái** tick được nhiều ô cùng lúc (không tick ô nào = tất cả). Danh sách **Serial** hiện ghi chú của máy; máy chưa có ghi chú thì hiện IP. Số đỏ trên nút là số điều kiện lọc đang bật.
 - **Tự chạy lại dòng lỗi**: mỗi máy chạy hết các dòng của mình. Sau dòng cuối, nếu còn dòng **Lỗi** thì máy nghỉ đúng thời gian *Nghỉ giữa video*, rồi chạy lại **1 lần** các dòng lỗi đó.
@@ -129,7 +129,9 @@
 - **SETCLIPBOARD / PASTE**: dùng app **Clipper** (`ca.zgrs.clipper`) nếu máy có cài.
   - Không có Clipper: PASTE gõ nội dung bằng ADBKeyboard.
 - **DELETEFILE**: không cho xóa thư mục hệ thống/gốc (`/sdcard`, `DCIM/Camera`...).
-- **VERIFYCHANNEL**: kiểm tra tên kênh đang đăng nhập trên màn hình khớp với cột `ID` trước khi tiếp tục, giúp tránh đăng nhầm kênh.
+- **VERIFYFIRST**: đặt sau bước mở Shopee và chuyển sang tab User (**Tôi**) để đọc `labelUserName` so với `{{ID}}` trước khi đổi kênh: nếu đã khớp ID thì trả về `"Đã khớp ID"` để `SWITCHACCOUNT` và `VERIFYCHANNEL` phía sau tự động bỏ qua; nếu chưa khớp thì trả về `"Không khớp ID"` để `SWITCHACCOUNT` thực hiện đổi kênh.
+- **SWITCHACCOUNT**: tự động mở workflow chuyển tài khoản (vd `MoDoiTK`), chọn đúng kênh `{{ID}}`, nhận diện thông báo `"Đã chuyển tài khoản"` và vượt mượt qua màn hình trắng 3 chấm đỏ khi Shopee khởi động lại phiên sang kênh mới.
+- **VERIFYCHANNEL**: kiểm tra tên kênh đang đăng nhập trên màn hình khớp với cột `ID` sau khi đổi kênh trước khi tiếp tục, giúp tránh đăng nhầm kênh.
 
 > Workflow dạng danh sách cũ được tự chuyển sang dạng node khi mở. `Shopee_Mau` chỉ là ví dụ (tọa độ giả định).
 > Ảnh mẫu trong `shopee_AI` trỏ tới `D:\Tool upload video\123\template.png` – hãy chọn/cắt lại nếu máy bạn không có file này.
