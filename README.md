@@ -4,7 +4,7 @@
 ### Cách 1: Dành cho người dùng (File cài đặt 1 chạm)
 1. Tải và chạy **`UpPhone_Setup.exe`** (từ trang Releases `https://github.com/hungtvt2198/UpPhone/releases`).
 2. Bấm **Yes** khi Windows hỏi quyền Quản trị viên (UAC) → chọn thư mục cài đặt (mặc định **`C:\Program Files\UpPhone`**) → bấm **Cài đặt ngay**.
-3. Khi có phiên bản mới, bấm nút **Update** (*Check for Update*) ở góc dưới cùng thanh chọn tab bên trái để tự động tải và nâng cấp trực tiếp (mọi workflow, ảnh mẫu, ghi chú và số máy trong `C:\Program Files\UpPhone` đều được giữ nguyên).
+3. Mỗi khi mở ứng dụng, màn hình khởi động (**Load App**) sẽ tự động kiểm tra phiên bản mới nhất: nếu có bản mới sẽ tự động tải trên thanh tiến trình và chạy bộ cài đặt nâng cấp; nếu đã ở bản mới nhất sẽ vào thẳng ứng dụng. Bạn cũng có thể bấm nút **Update** (*Check for Update*) ở góc dưới cùng thanh chọn tab bên trái bất cứ lúc nào (mọi workflow, ảnh mẫu, ghi chú và số máy trong `C:\Program Files\UpPhone` đều được giữ nguyên).
 
 ### Cách 2: Chạy từ mã nguồn (Dành cho phát triển)
 1. `conda activate E:\UpPhone\venup` rồi `pip install -r requirements.txt`
