@@ -27,13 +27,10 @@
 
 ### Trang Dữ liệu
 - **Nhập Excel**: cho phép chọn **nhiều file Excel cùng lúc** chứa thông tin đăng video; nếu bảng đã có dữ liệu (cả khi đang rảnh lẫn đang chạy) sẽ tự cộng dồn vào cuối bảng mà không làm mất các file đã nhập trước đó. **Mẫu Excel**: lưu file template. **Xuất Excel**: xuất các dòng đang hiển thị ra file mới, kèm *Trạng thái* và *Thời gian kết thúc*. Khi nhập lại file đã xuất, trạng thái được giữ.
-- **Thêm**: nhập tay 1 dòng (chọn Serial kèm ghi chú, chọn/nhập ID Kênh từ Google Sheet Data Master). **Chạy (n)** / **Hẹn giờ** / **Xóa (n)**: áp dụng cho các dòng đã tick và đang hiển thị (dấu tích ở tất cả các dòng — kể cả dòng đang chạy — luôn hiển thị và không bị khóa để có thể chọn/bỏ chọn tự do bất cứ lúc nào). **Dừng**: dừng tất cả các máy (hoặc hủy lịch hẹn giờ đang đếm ngược).
+- **Thêm**: nhập tay 1 dòng (chọn Serial kèm ghi chú, chọn/nhập ID Kênh từ Google Sheet Data Master). **Chạy (n)** / **Hẹn giờ** / **Xóa (n)**: áp dụng cho các dòng đã tick và đang hiển thị (dấu tích ở tất cả các dòng — kể cả dòng đang chạy — luôn hiển thị và không bị khóa để có thể chọn/bỏ chọn tự do bất cứ lúc nào). **Dừng**: nút có nền riêng biệt và tự sáng nền màu đỏ nổi bật khi đang chạy; bấm **Dừng** sẽ ngắt toàn bộ tiến trình trên mọi máy ngay lập tức (hoặc hủy lịch hẹn giờ đang đếm ngược).
 - **Hẹn giờ bắt đầu chạy**: chọn thời điểm cụ thể (ngày/giờ/phút + nút chọn nhanh `+15 phút`, `+30 phút`, `+1 giờ`, `+2 giờ`) hoặc đếm ngược sau X giờ Y phút; nút `Hẹn giờ` hiển thị thời gian đếm ngược trực tiếp và tự động kích hoạt chạy khi đến giờ.
 - **Lọc dữ liệu**: lọc theo serial, workflow, trạng thái hoặc từ khóa. **Trạng thái** tick được nhiều ô cùng lúc (không tick ô nào = tất cả). Danh sách **Serial** hiện ghi chú của máy; máy chưa có ghi chú thì hiện IP. Số đỏ trên nút là số điều kiện lọc đang bật.
-- **Tự chạy lại dòng lỗi**: mỗi máy chạy hết các dòng của mình. Sau dòng cuối, nếu còn dòng **Lỗi** thì máy nghỉ đúng thời gian *Nghỉ giữa video*, rồi chạy lại **1 lần** các dòng lỗi đó.
-  - Dòng thành công không chạy lại.
-  - Không chạy lại: dòng *Đã dừng*, dòng thiếu workflow, hoặc khi đã bấm **Dừng**.
-  - Trong lúc chờ chạy lại, dòng lỗi vẫn bị khóa. Bấm ■ trên dòng đó để bỏ lượt chạy lại.
+- **Dừng hẳn khi dòng lỗi**: mỗi máy chạy lần lượt các dòng của mình; khi dòng nào gặp lỗi thì dòng đó dừng hẳn ở trạng thái **Lỗi** (không đợi chạy lại) và máy chuyển sang dòng kế tiếp.
 - Trên mỗi dòng:
   - 🖥 cạnh serial: mở **cửa sổ Mirror** của máy (giống nút Mirror ở trang Thiết bị), tiêu đề là *Ghi chú* của máy. Bấm lại thì đưa cửa sổ lên trước.
   - 👁 cạnh video: mở video. 📁: **chọn lại file video** (khi đường dẫn trong Excel bị sai).
@@ -41,7 +38,7 @@
   - ▶ **Chạy** riêng dòng đó. Nếu máy đang chạy dòng khác thì phần mềm báo *Máy đang bận*. Khi dòng đang chạy hoặc đang chờ, nút đổi thành ■ để dừng riêng dòng đó; máy sẽ chạy tiếp dòng sau.
   - 🗑 **Xóa** dòng khỏi danh sách. File Excel không bị thay đổi. Không xóa được dòng đang chạy.
 - **Sửa trực tiếp trên bảng**: bấm 1 lần vào ô **ID**, **SERIAL**, **TÊN WORKFLOW**, **ĐƯỜNG DẪN VIDEO**, **LINK AFFILIATE** hoặc **TIÊU ĐỀ** để sửa. Enter để lưu, Esc để hủy.
-  - Chỉ khóa dòng đang thực sự **Đang chạy**; các dòng đang *Chờ* trong hàng đợi vẫn sửa được bình thường (đổi SERIAL sẽ tự chuyển dòng chờ sang máy mới).
+  - Mọi dòng trên bảng — kể cả dòng đang ở trạng thái **Đang chạy** hay đang *Chờ* — đều chỉnh sửa trực tiếp được bất kỳ lúc nào (bao gồm cả nút 📁 chọn lại file video).
   - SERIAL: gõ IP (không cần `:5555`) hoặc serial USB. Cột Ghi chú tự đổi theo máy mới.
   - TÊN WORKFLOW: chọn trong danh sách các workflow đang có.
   - TIÊU ĐỀ: Shift+Enter để xuống dòng. Chỗ sửa chỉ lưu trong phần mềm, file Excel gốc không bị thay đổi; muốn lưu ra file thì bấm **Xuất Excel**.
@@ -129,9 +126,8 @@
 - **SETCLIPBOARD / PASTE**: dùng app **Clipper** (`ca.zgrs.clipper`) nếu máy có cài.
   - Không có Clipper: PASTE gõ nội dung bằng ADBKeyboard.
 - **DELETEFILE**: không cho xóa thư mục hệ thống/gốc (`/sdcard`, `DCIM/Camera`...).
-- **VERIFYFIRST**: đặt sau bước mở Shopee và chuyển sang tab User (**Tôi**) để đọc `labelUserName` so với `{{ID}}` trước khi đổi kênh: nếu đã khớp ID thì trả về `"Đã khớp ID"` để `SWITCHACCOUNT` và `VERIFYCHANNEL` phía sau tự động bỏ qua; nếu chưa khớp thì trả về `"Không khớp ID"` để `SWITCHACCOUNT` thực hiện đổi kênh.
-- **SWITCHACCOUNT**: tự động mở workflow chuyển tài khoản (vd `MoDoiTK`), chọn đúng kênh `{{ID}}`, nhận diện thông báo `"Đã chuyển tài khoản"` và vượt mượt qua màn hình trắng 3 chấm đỏ khi Shopee khởi động lại phiên sang kênh mới.
-- **VERIFYCHANNEL**: kiểm tra tên kênh đang đăng nhập trên màn hình khớp với cột `ID` sau khi đổi kênh trước khi tiếp tục, giúp tránh đăng nhầm kênh.
+- **SWITCHACCOUNT**: tự động tìm tài khoản `{{ID}}` trên màn hình *Đổi tài khoản* (nếu dòng chứa `Hiện tại` thì bấm quay lại vì đã đúng kênh, nếu là kênh khác thì bấm chuyển tài khoản).
+- **VERIFYCHANNEL**: kiểm tra tên kênh đang đăng nhập trên màn hình khớp với cột `ID` trước khi tiếp tục, giúp tránh đăng nhầm kênh.
 
 > Workflow dạng danh sách cũ được tự chuyển sang dạng node khi mở. `Shopee_Mau` chỉ là ví dụ (tọa độ giả định).
 > Ảnh mẫu trong `shopee_AI` trỏ tới `D:\Tool upload video\123\template.png` – hãy chọn/cắt lại nếu máy bạn không có file này.
