@@ -1,5 +1,7 @@
 # UpPhone – Phone Farm Shopee Video Uploader
 
+> **Phiên bản mới nhất:** **`v1.0.15`** – tối ưu hiệu năng toàn diện cho dàn 40+ thiết bị chạy 24/7 (khởi động nhanh hơn 2×, tách lưu phiên bất đồng bộ không đơ UI, render lưới màn hình bằng `libswscale` C mượt mà, nhận diện ảnh mẫu OpenCV `CLICKIMAGE` 2 tầng BGR nhanh gấp ~6×, group-commit Excel đa luồng và tinh gọn nút chọn tab sidebar).
+
 ## Cài đặt & Cập nhật
 ### Cách 1: Dành cho người dùng (File cài đặt 1 chạm)
 1. Tải và chạy **`UpPhone_Setup.exe`** (từ trang Releases `https://github.com/hungtvt2198/UpPhone/releases`).
@@ -71,7 +73,7 @@
 - **Điều khiển trực tiếp & Đồng bộ nhóm 20+ máy mượt mà (Group Control độ trễ ~0 ms)**:
   - Nhấp đúp vào ô thiết bị trên lưới để phóng to màn hình điều khiển (`StreamDialog`) mở ngay trong `0 ms`. Ô nhỏ trên lưới tự phủ tối kèm bảng trạng thái **🎮 Đang điều khiển** và viền xanh lá để nhận biết rõ máy đang mở lớn.
   - Phiên chiếu màn hình giữ kết nối ổn định kể cả khi máy đứng yên không thao tác, tự động đẩy lại `scrcpy-server` & kết nối lại liên tục khi WiFi ADB chập chờn (hoặc bấm **Kết nối thiết bị** để ép nối lại tức thì, tự dọn IP đã ngoại tuyến và hiện dải cảnh báo ở đáy khung hình nếu đang mất kết nối).
-  - Tối ưu giải mã H.264 cho dàn 20–40 máy và gửi sự kiện chạm bất đồng bộ kèm gộp tọa độ rê chuột theo từng thiết bị để thao tác đồng loạt 20 máy không bị giật/trễ.
+  - Tối ưu giải mã H.264 với `VideoReformatter` riêng trên từng thiết bị và downscale lưới trực tiếp ở tầng C cho dàn 20–40 máy, gửi sự kiện chạm bất đồng bộ kèm gộp tọa độ rê chuột theo từng thiết bị để thao tác đồng loạt không bị giật/trễ.
   - Thanh chức năng bên phải màn hình phóng to bố trí theo **Bento Grid 4 nhóm** gồm 21 nút tiện ích: **📂 Truyền file từ PC**, **🗑 Xóa file Thư viện** (xóa sạch ảnh/video trong Thư viện và làm mới MediaStore cho **1 máy** đang mở hoặc **đồng bộ nhiều máy** đang chọn), **📦 Cài đặt APK**, xoay màn hình, chụp ảnh màn hình, tắt màn hình vật lý vẫn chiếu trên PC, đặt số máy làm hình nền...
 
 ## File Excel (template `import/shopee_upload_teamplte.xlsx`)
