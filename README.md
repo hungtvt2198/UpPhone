@@ -1,6 +1,6 @@
 # UpPhone – Phone Farm Shopee Video Uploader
 
-> **Phiên bản mới nhất:** **`v1.0.17`** – nâng cấp giao diện **Nhập Google Sheet** trực quan hơn (chữ tên tab lớn `11pt`, ô tích chọn `20 px` rõ nét, bấm vào bất kỳ chỗ nào trên dòng để tích/bỏ tích, pill badge trạng thái Serial và hộp thông báo tiến độ **`Đang nhập dữ liệu...`** tự động thoát thẳng về màn hình **Đăng video** sau khi nạp xong).
+> **Phiên bản mới nhất:** **`v1.0.18`** – sửa triệt để lỗi văng app đột ngột `Qt FATAL: QThread: Destroyed while thread is still running` (quản lý tập trung vòng đời mọi luồng nền qua `crash_guard`, kiểm tra cả `isRunning()` & `wait(0)`, bảo vệ tín hiệu muộn trên hộp thoại và thoát tiến trình an toàn), gia cố kiểm tra biên bộ nhớ/ngưỡng gói `scrcpy-server`, và sửa lỗi `KeyError` giao diện (`MultiSerialComboBox`, `AppsScriptCodeDialog`).
 
 ## Cài đặt & Cập nhật
 ### Cách 1: Dành cho người dùng (File cài đặt 1 chạm)
